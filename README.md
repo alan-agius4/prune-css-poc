@@ -52,10 +52,10 @@ Output
 ]
 ```
 
-## Why does it work?
+## How does it work?
 
 The extractor uses RegExp to match each word in each file to see if it is used or not:
 https://purgecss.com/extractors.html#default-extractor
 
-# What if classes have special characters or are consumed using interpolation?
+## What if classes have special characters or are consumed using interpolation?
 These options can be provided using the [safelist](https://purgecss.com/configuration.html#options) option.
