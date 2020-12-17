@@ -1,27 +1,60 @@
-# PruneCss
+# Prune unused CSS
+Pruning unused CSS is one of those features that is requestes over and over again. Especially when we tweet about a new feature on Twitter.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.1.0-next.0.
+This is a POC of using [PruneCSS](https://purgecss.com/configuration.html#options) to remove unused global CSS.
 
-## Development server
+In our global stylesheet we define 10 CSS classes. 
+```css
+/* Used */
+.one { color: red; }
+.two { color: red; }
+.three { color: red; }
+.four { color: red; }
+.five { color: red; }
+.six { color: red; }
+.seven { color: red; }
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+/* Unused */ 
+.eight { color: red; }
+.nine { color: red; }
+.ten { color: red; }
+```
 
-## Code scaffolding
+Classes from one to seven are used in various ways.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+```html
+<div class="one">...</div>
+<div [ngClass]="'two'">...</div>
+<div [ngClass]="{'three': true, 'four': true}">...</div>
+<div [ngClass]="{'five six' : true}">...</div>
+<div class="{{ classNameFromTS }}">...</div>
+```
 
-## Build
+## Try it out
+```
+yarn build
+```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+Output
+```
+[
+  {
+    css: '/* You can add global styles to this file, and also import other style files */\n' +
+      '.one { color: red; }\n' +
+      '.two { color: red; }\n' +
+      '.three { color: red; }\n' +
+      '.four { color: red; }\n' +
+      '.six { color: red; }\n' +
+      '.seven { color: red; }\n',
+    file: 'dist/prune-css/styles.552657ea5cfb6cf8f820.css'
+  }
+]
+```
 
-## Running unit tests
+## Why does it work?
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+The extractor uses RegExp to match each word in each file to see if it is used or not:
+https://purgecss.com/extractors.html#default-extractor
 
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+# What if classes have special characters or are consumed using interpolation?
+These options can be provided using the [safelist](https://purgecss.com/configuration.html#options) option.

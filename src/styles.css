@@ -1,1 +1,13 @@
-/* You can add global styles to this file, and also import other style files */
+/* Used */
+.one { color: red; }
+.two { color: red; }
+.three { color: red; }
+.four { color: red; }
+.five { color: red; }
+.six { color: red; }
+.seven { color: red; }
+
+/* Unused */
+.eight { color: red; }
+.nine { color: red; }
+.ten { color: red; }
