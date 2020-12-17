@@ -37,17 +37,19 @@ yarn build
 ```
 
 Output
-```
+```js
 [
   {
-    css: '/* You can add global styles to this file, and also import other style files */\n' +
+    css: '/* Used */\n' +
       '.one { color: red; }\n' +
       '.two { color: red; }\n' +
       '.three { color: red; }\n' +
       '.four { color: red; }\n' +
+      '.five { color: red; }\n' +
       '.six { color: red; }\n' +
-      '.seven { color: red; }\n',
-    file: 'dist/prune-css/styles.552657ea5cfb6cf8f820.css'
+      '.seven { color: red; }\n' +
+      '/* Unused */\n',
+    file: 'dist/prune-css/styles.b78ed4a66876b00457f9.css'
   }
 ]
 ```
