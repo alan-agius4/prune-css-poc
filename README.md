@@ -32,6 +32,7 @@ Classes from one to seven are used in various ways.
 
 ## Try it out
 ```
+yarn
 yarn build
 ```
 
